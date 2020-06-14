@@ -4,11 +4,14 @@ int main()
 {
 	using namespace BERTCP;
 	//
-    WSADATA wsdata;
-    WSAStartup(0x0101,&wsdata);
-
+    #ifdef OS_WINDOWS
+        WSADATA wsdata;
+        WSAStartup(0x0101,&wsdata);
+    #endif
 	Server::TheServer().run();
 	//
-    WSACleanup();
-	return 0;
+    #ifdef OS_WINDOWS
+        WSACleanup();
+    #endif
+    return 0;
 }
